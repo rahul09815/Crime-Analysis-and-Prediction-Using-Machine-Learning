@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <title>Crime Analysis</title>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <h1><strong>Crime Analysis</strong></h1>
+    </div>
+    <br/>
+    <br/>
+    <center>
+        <form action="train_classifier" method="get" id="trainForm">
+            <button type="submit" class="btn btn-primary">Train Classifier</button>
+        </form>
+        <br/>
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <form action="predict_crime_rate" method="get" id="predict_crime_rate" name="register">
+                    <div class="form-group">
+                        <label class="col-form-label">Year :&nbsp;</label>
+                        <input type="text" name="year" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Category :&nbsp;</label>
+
+                        <select name="category" class="form-control" required>
+                            <option value="">Choose Crime Category</option>
+                            <option value="WARRANTS">WARRANTS</option>
+                            <option value="OTHER OFFENSES">OTHER OFFENSES</option>
+                            <option value="LARCENY/THEFT">LARCENY/THEFT</option>
+                            <option value="VEHICLE THEFT">VEHICLE THEFT</option>
+                            <option value="VANDALISM">VANDALISM</option>
+                            <option value="NON-CRIMINAL">NON-CRIMINAL</option>
+                            <option value="ROBBERY">ROBBERY</option>
+                            <option value="ASSAULT">ASSAULT</option>
+                            <option value="WEAPON LAWS">WEAPON LAWS</option>
+                            <option value="BURGLARY">BURGLARY</option>
+                            <option value="SUSPICIOUS OCC">SUSPICIOUS OCC</option>
+                            <option value="DRUNKENNESS">DRUNKENNESS</option>
+                            <option value="FORGERY/COUNTERFEITING">FORGERY/COUNTERFEITING</option>
+                            <option value="DRUG/NARCOTIC">DRUG/NARCOTIC</option>
+                            <option value="STOLEN PROPERTY">STOLEN PROPERTY</option>
+                            <option value="SECONDARY CODES">SECONDARY CODES</option>
+                            <option value="TRESPASS">TRESPASS</option>
+                            <option value="MISSING PERSON">MISSING PERSON</option>
+                            <option value="FRAUD">FRAUD</option>
+                            <option value="KIDNAPPING">KIDNAPPING</option>
+                            <option value="RUNAWAY">RUNAWAY</option>
+                            <option value="DRIVING UNDER THE INFLUENCE">DRIVING UNDER THE INFLUENCE</option>
+                            <option value="SEX OFFENSES FORCIBLE">SEX OFFENSES FORCIBLE</option>
+                            <option value="PROSTITUTION">PROSTITUTION</option>
+                            <option value="DISORDERLY CONDUCT">DISORDERLY CONDUCT</option>
+                            <option value="ARSON">ARSON</option>
+                            <option value="FAMILY OFFENSES">FAMILY OFFENSES</option>
+                            <option value="LIQUOR LAWS">LIQUOR LAWS</option>
+                            <option value="BRIBERY">BRIBERY</option>
+                            <option value="EMBEZZLEMENT">EMBEZZLEMENT</option>
+                            <option value="SUICIDE">SUICIDE</option>
+                            <option value="LOITERING">LOITERING</option>
+                            <option value="SEX OFFENSES NON FORCIBLE">SEX OFFENSES NON FORCIBLE</option>
+                            <option value="EXTORTION">EXTORTION</option>
+                            <option value="GAMBLING">GAMBLING</option>
+                            <option value="BAD CHECKS">BAD CHECKS</option>
+                            <option value="TREA">TREA</option>
+                            <option value="RECOVERED VEHICLE">RECOVERED VEHICLE</option>
+                            <option value="PORNOGRAPHY/OBSCENE MAT">PORNOGRAPHY/OBSCENE MAT</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Algorithm :&nbsp;</label>
+
+                        <select name="algorithm" class="form-control" required>
+                            <option value="">Choose Algorithm</option>
+                            <option value="random_forest">Random Forest</option>
+                            <option value="linear">Linear Regression</option>
+                            <option value="polynomial">Polynomial Regression</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <button class="btn btn-success btn-lg" type="submit">Predict</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </center>
+    <hr class="mt-0 mb-4">
+    <div id="resultsBlock" style="display:block;">
+        <center><h1>Result Analysis</h1></center>
+        <br/>
+        <div class="row justify-content-center">
+            <h1>Cases by hour</h1>
+            <img class="col-md-12" src="media/output_dir/hourly_events.png" alt="Bangladesh Crime Rate by Hour"/>
+        </div>
+        <hr class="mt-0 mb-4">
+        <div class="row justify-content-center">
+            <h1>Cases every two weeks</h1>
+            <img class="col-md-12" src="media/output_dir/events_every_two_weeks.png" alt="Events every two weeks"/>
+        </div>
+        <hr class="mt-0 mb-4">
+        <div class="row justify-content-center">
+            <h1>Hourly Cases by District</h1>
+            <img class="col-md-12" src="media/output_dir/hourly_events_by_district.png" alt="Events by District"/>
+        </div>
+        <hr class="mt-0 mb-4">
+        <div class="row justify-content-center">
+            <h1>Bangladesh Crime Rate by Year</h1>
+            <img class="col-md-12" src="media/output_dir/Bangladesh_Crime_Rate_by_Year.png" alt="Bangladesh Crime Rate by Year"/>
+        </div>
+        <hr class="mt-0 mb-4">
+        <div class="row justify-content-center">
+            <h1>Bangladesh Crime Rate by Category</h1>
+            <img class="col-md-12" src="media/output_dir/Bangladesh_Crime_Rate_by_Category.png" alt="Bangladesh Crime Rate by Category"/>
+        </div>
+        <hr class="mt-0 mb-4">
+
+
+        <div class="row justify-content-center">
+            <h1>Metrics - EVS Score</h1>
+            <img class="col-md-12" src="media/output_dir/Metrics_EVS Score.png" alt="Metrics EVS Score"/>
+        </div>
+        <hr class="mt-0 mb-4">
+
+
+        <div class="row justify-content-center">
+            <h1>Metrics - MAE Score</h1>
+            <img class="col-md-12" src="media/output_dir/Metrics_MAE Score.png" alt="Metrics EVS Score"/>
+        </div>
+        <hr class="mt-0 mb-4">
+
+
+        <div class="row justify-content-center">
+            <h1>Metrics - MSE Score</h1>
+            <img class="col-md-12" src="media/output_dir/Metrics_MSE Score.png" alt="Metrics MSE Score"/>
+        </div>
+        <hr class="mt-0 mb-4">
+
+
+        <div class="row justify-content-center">
+            <h1>Metrics - R2 Score</h1>
+            <img class="col-md-12" src="media/output_dir/Metrics_R2 Score.png" alt="Metrics R2 Score"/>
+        </div>
+        <hr class="mt-0 mb-4">
+
+
+        <div class="row justify-content-center">
+            <h1>Algorithm Prediction Comparison</h1>
+            <img class="col-md-12" src="media/output_dir/Algorithm Prediction Comparison.png" alt="Algorithm Prediction Comparison"/>
+        </div>
+    </div>
+    <br/>
+    <hr class="mt-0 mb-4">
+</div>
+
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script>
+
+    $("#resultsBlock").hide();
+    // this is the id of the form
+    $("#trainForm").submit(function (e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        $("#resultsBlock").hide();
+        $("#processingModal").modal();
+        var frm = $(this);
+        var url = frm.attr('action');
+
+
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: false,
+            success: function (response) {
+                console.log(response);
+                console.log('Submission was successful.');
+
+
+                $("#result_summary").html('Training status : ' + response.success);
+
+                $("#resultsBlock").show();
+                setTimeout(function () {
+                    $('#processingModal').modal('hide');
+                    $("#myModal").modal();
+                }, 1000);
+            },
+            error: function (response) {
+                console.log('An error occurred : ' + response);
+                $("#result_summary").html('Training status error : ' + response);
+                setTimeout(function () {
+                    $('#processingModal').modal('hide');
+                    $("#myModal").modal();
+                }, 1000);
+            },
+        });
+    });
+
+
+    $("#predict_crime_rate").submit(function (e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        $("#resultsBlock").hide();
+        $("#processingModal").modal();
+        var frm = $(this);
+        var url = frm.attr('action');
+
+
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: frm.serialize(),
+            success: function (response) {
+                console.log(response);
+                console.log('Submission was successful.');
+
+
+                $("#result_summary").html('Crime Rate : ' + response.data);
+
+                $("#resultsBlock").show();
+                setTimeout(function () {
+                    $('#processingModal').modal('hide');
+                    $("#myModal").modal();
+                }, 1000);
+            },
+            error: function (response) {
+                console.log('An error occurred : ' + response);
+                $("#result_summary").html('Error Predicting Crime Rate : ' + response);
+                setTimeout(function () {
+                    $('#processingModal').modal('hide');
+                    $("#myModal").modal();
+                }, 1000);
+            },
+        });
+    });
+
+
+</script>
+
+<!-- The Modal -->
+<div class="modal fade" id="processingModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Processing please wait</h4>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Summary</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p id="result_summary"></p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
